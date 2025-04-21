@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<publicationModule>
+  <ident>
+    <pmAddress>
+      <pmIdent>
+        <pmCode modelIdentCode="TIQ" pmIssuer="HAILY" pmNumber="001" />
+        <language countryIsoCode="US" languageIsoCode="en" />
+      </pmIdent>
+      <pmTitle>
+        <techName>TIQ System Incident Report Bundle</techName>
+        <infoName>Debugging and Documentation Modules</infoName>
+      </pmTitle>
+    </pmAddress>
+  </ident>
+
+  <content>
+    <dmRef>
+      <dmRefIdent>
+        <dmCode modelIdentCode="TIQ" systemCode="99" subSystemCode="01" issueNumber="001" inWork="00" infoCode="MNT" itemLocationCode="0001" />
+      </dmRefIdent>
+    </dmRef>
+    <dmRef>
+      <dmRefIdent>
+        <dmCode modelIdentCode="TIQ" systemCode="99" subSystemCode="03" issueNumber="001" inWork="00" infoCode="MNT" itemLocationCode="0002" />
+      </dmRefIdent>
+    </dmRef>
+    <dmRef>
+      <dmRefIdent>
+        <dmCode modelIdentCode="TIQ" systemCode="99" subSystemCode="04" issueNumber="001" inWork="00" infoCode="MNT" itemLocationCode="0003" />
+      </dmRefIdent>
+    </dmRef>
+  </content>
+
+  <remarks>
+    <para>This publication module groups all TIQ system incident reports created in April 2025 by Haily Stevens. Intended for simulated IETM rendering and analysis workflows.</para>
+  </remarks>
+</publicationModule>
