@@ -66,3 +66,7 @@ The S1000D XML standard is widely used in aerospace and defense for technical pu
 
 Created by [Haily Stevens](https://github.com/hailystevens) — Clinical Systems Support + aspiring Systems Analyst at Boeing ✈️  
 This repo is part of an ongoing technical documentation and tooling development portfolio.
+
+---
+
+> ⚠️ All files in this project have been scrubbed of any protected health information (PHI), sensitive identifiers, and proprietary code. Logs, screenshots, and content are simulated, redacted, or recreated for educational and demonstration purposes only.
