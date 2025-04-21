@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmodule>
+  <ident>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="TIQ" systemCode="99" subSystemCode="04" issueNumber="001" inWork="00" infoCode="MNT" itemLocationCode="0003" />
+        <language countryIsoCode="US" languageIsoCode="en" />
+      </dmIdent>
+      <dmTitle>
+        <techName>Moment.js Deprecation Warning</techName>
+        <infoName>System Bug Report</infoName>
+      </dmTitle>
+    </dmAddress>
+  </ident>
+
+  <content>
+    <description>
+      <para>This data module documents a recurring deprecation warning in TIQ’s production environment caused by improperly formatted date strings passed into Moment.js, leading to unreliable parsing and logging.</para>
+    </description>
+
+    <fault>
+      <symptom>Console displays warning: "Deprecation warning: moment(...).format(...) is using a fallback for non-recognized date format \"04/05/2025\""</symptom>
+      <cause>TIQ client-side code is passing ambiguous U.S.-formatted dates (MM/DD/YYYY) without ISO standard or explicit locale. Moment.js falls back to parsing heuristics, triggering warning and risking incorrect output.</cause>
+      <remedy>
+        <step>Update all date parsing calls to explicitly use ISO 8601 or locale-aware formats (e.g., `moment('2025-04-05')`).</step>
+        <step>Wrap user-input dates with `moment.utc(...).local()` where timezone safety is required.</step>
+        <step>Refactor legacy date logic to newer libraries (e.g., Day.js, Luxon) with better validation support.</step>
+        <step>Suppress noisy warnings only after verifying the input is safe, not as a blanket rule.</step>
+      </remedy>
+    </fault>
+
+    <figure>
+      <title>Console Warning Example</title>
+      <para>
+        <code>
+          Deprecation warning: value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to JS Date(): 04/05/2025
+        </code>
+      </para>
+    </figure>
+
+    <remarks>
+      <para>Observed during April 6 midnight testing window. May interfere with token or expiration parsing logic during session refresh cycles if improper date formats lead to miscalculations.</para>
+    </remarks>
+  </content>
+</dmodule>
