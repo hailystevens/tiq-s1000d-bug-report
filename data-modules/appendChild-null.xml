@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmodule>
+  <ident>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="TIQ" systemCode="99" subSystemCode="03" issueNumber="001" inWork="00" infoCode="MNT" itemLocationCode="0002" />
+        <language countryIsoCode="US" languageIsoCode="en" />
+      </dmIdent>
+      <dmTitle>
+        <techName>DOM appendChild Null Reference Error</techName>
+        <infoName>System Bug Report</infoName>
+      </dmTitle>
+    </dmAddress>
+  </ident>
+
+  <content>
+    <description>
+      <para>This data module documents a recurring runtime error within the TIQ web application where an async operation attempts to call <code>appendChild</code> on a null DOM element, resulting in a TypeError and broken UI rendering.</para>
+    </description>
+
+    <fault>
+      <symptom>"Uncaught (in promise) TypeError: Cannot read properties of null (reading 'appendChild')" observed in production logs during midnight refresh cycle.</symptom>
+      <cause>DOM element referenced by JavaScript has been removed or not rendered before `appendChild` is called asynchronously. Occurs after page inactivity or partial state teardown.</cause>
+      <remedy>
+        <step>Add conditional checks before DOM manipulation (e.g. `if (element)`).</step>
+        <step>Ensure deferred UI logic is gated by DOM readiness events or timeout guards.</step>
+        <step>Audit modules for async DOM rendering that occurs after token/session invalidation.</step>
+        <step>Implement error boundary to catch and report null reference attempts cleanly.</step>
+      </remedy>
+    </fault>
+
+    <figure>
+      <title>Stack Trace Example</title>
+      <para>
+        <code>
+          at HTMLDivElement.<anonymous> (main.js:3174)
+          at Generator.next (<anonymous>)
+          at asyncGeneratorStep (main.js:1923)
+          at _next (main.js:1945)
+          at main.js:1952
+        </code>
+      </para>
+    </figure>
+
+    <remarks>
+      <para>Generated as a companion report to tiq-token-refresh.xml. Confirmed during QA walkthrough of midnight bug pattern involving OAuth failure and DOM race condition.</para>
+    </remarks>
+  </content>
+</dmodule>
