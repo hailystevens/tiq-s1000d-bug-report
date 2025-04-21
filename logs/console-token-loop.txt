@@ -1,0 +1,43 @@
+[00:00:01] 📡 TIQ Midnight Monitor: {
+  "⏰ Time": "4/20/2025, 12:00:01 AM",
+  "📦 TokenManager": "accessToken: ACTIVE, expiresAt: 00:43:03",
+  "🔄 HubConnection state": "Connected"
+}
+
+[00:00:58] 📡 TIQ Midnight Monitor: {
+  "⏰ Time": "4/20/2025, 12:00:58 AM",
+  "📦 TokenManager": "accessToken: ACTIVE",
+  "🔄 HubConnection state": "Connected"
+}
+
+[00:01:02] ⚠️ OAuth2 silent renew attempt failed
+Error 400: Bad Request — stale PKCE detected
+
+[00:01:02] 🚨 HubConnection: `.start()` called while `.stop()` is unresolved
+[00:01:02] ❌ SignalR negotiation error: transport already in use
+
+[00:01:03] 📉 Application unresponsive — consult list failed to load
+[00:01:07] ⛔ appendChild TypeError — DOM element is null
+
+[00:01:10] 🔁 Retrying OAuth token refresh...
+[00:01:10] ⚠️ OAuth2 silent renew failed again
+
+[00:02:00] 📡 TIQ Midnight Monitor: {
+  "⏰ Time": "4/20/2025, 12:02:00 AM",
+  "📦 TokenManager": "accessToken: EXPIRED",
+  "🔄 HubConnection state": "Disconnected"
+}
+
+[00:02:30] ⚠️ No user feedback — stale screen, spinning loader
+[00:03:15] 💡 User manually refreshes page
+
+[00:03:18] ✅ Full page reload triggers new OAuth flow
+[00:03:19] 🆗 Token successfully refreshed — new expiration 01:03:19
+[00:03:21] 🔄 SignalR connection established
+[00:03:25] 🟢 UI responsive — consult data fully loaded
+
+---
+
+Notes:
+- All tokens shown above are simulated and redacted.
+- This log is anonymized and reflects structure for debugging documentation, not real session data.

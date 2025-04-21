@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmodule>
+  <ident>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="TIQ" systemCode="99" subSystemCode="01" issueNumber="001" inWork="00" infoCode="MNT" itemLocationCode="0001" />
+        <language countryIsoCode="US" languageIsoCode="en" />
+      </dmIdent>
+      <dmTitle>
+        <techName>Token Refresh and SignalR Reconnection Failure</techName>
+        <infoName>System Bug Report</infoName>
+      </dmTitle>
+    </dmAddress>
+  </ident>
+
+  <content>
+    <description>
+      <para>This data module documents a recurring midnight issue in the TIQ application where silent OAuth2 token refresh fails, leading to infinite SignalR reconnection loops and degraded platform performance.</para>
+    </description>
+
+    <fault>
+      <symptom>TIQ fails to automatically refresh consult/scheduled data post-midnight. UI becomes unresponsive until a manual reload.</symptom>
+      <cause>Expired authentication tokens are reused with stale PKCE parameters, triggering 400 errors from Okta. Concurrent SignalR re-initiation fails due to timing mismatches and missing transport initialization.</cause>
+      <remedy>
+        <step>Ensure fresh PKCE parameters are generated before each silent OAuth2 refresh attempt.</step>
+        <step>Fix race conditions between SignalR HubConnection stop() and start() methods using internal locking or debounce logic.</step>
+        <step>Audit beforeunload event listeners for incomplete cleanup routines; implement fallback logic using pagehide if applicable.</step>
+        <step>Log all renewal attempts, state transitions, and token expiration timestamps for auditability and replay debugging.</step>
+      </remedy>
+    </fault>
+
+    <figure>
+      <title>Timeline of Issue Reproduction</title>
+      <para>Screenshot logs and stack traces confirm an expired token around 00:43:03, multiple failed OAuth requests, and a cascade of HubConnection.start() / stop() overlap errors. Recovery only occurs after manual page refresh.</para>
+    </figure>
+
+    <remarks>
+      <para>Documentation based on analysis by Haily Stevens, 2025-04-04, including annotated HAR logs, console transcripts, and observed UI states. Refer to linked screenshots for correlation between logs and root cause.</para>
+    </remarks>
+  </content>
+</dmodule>
